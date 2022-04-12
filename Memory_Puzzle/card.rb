@@ -1,10 +1,9 @@
 class Card
-  attr_reader :faceup
+  attr_reader :faceup, :value
   
   def initialize(value)
     @value = value
-    # should be false
-    @faceup = true
+    @faceup = false
   end
 
   def hide
