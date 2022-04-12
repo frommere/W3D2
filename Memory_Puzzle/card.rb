@@ -1,7 +1,10 @@
 class Card
+  attr_reader :faceup
+  
   def initialize(value)
     @value = value
-    @faceup = false
+    # should be false
+    @faceup = true
   end
 
   def hide
@@ -13,6 +16,10 @@ class Card
   end
 
   def output
-    return @value if @faceup
+    if @faceup
+      @value
+    else
+      " "
+    end
   end
 end
