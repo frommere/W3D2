@@ -27,9 +27,7 @@ class Game
       @board.reveal(pos_1)
       @board.render
       pos_2 = @player.get_position(@size)
-      if @player.name.nil?
         @player.receive_revealed_card(pos_2, @board[pos_2].value)
-      end
       @board.reveal(pos_2)
       @board.render
       if @board[pos_1].value != @board[pos_2].value
@@ -38,6 +36,8 @@ class Game
         puts "incorrect guess"
         @remaining_guesses -= 1
         puts "remaining_guesses: #{@remaining_guesses}"
+      else
+        @player.receive_match(pos_1, pos_2)
       end
     end
     
