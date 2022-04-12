@@ -45,4 +45,22 @@ class Board
       false
     end
   end
+
+  def [](pos)
+    row, column = pos
+    @grid[row][column]
+  end
+  def reveal(pos)
+    row, column = pos
+    @grid[row][column].reveal
+    return @grid[row][column]
+  end
+  def hide(pos)
+    row, column = pos
+    @grid[row][column].hide
+    return @grid[row][column]
+  end
+
+
+
 end
