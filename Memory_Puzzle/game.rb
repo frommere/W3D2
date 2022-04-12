@@ -1,28 +1,29 @@
 require_relative "card.rb"
 require_relative "board.rb"
+require_relative "player.rb"
 
 class Game
-  def initialize(human: true, size = 4)
+  def initialize(size = 4, *name)
     @board = Board.new(size)
+    @size = size
     @remaining_guesses = (size * size) / 2
-    @human? = human?
-  end
+    if !name.nil?
+        @player = Player.new(name.first)
+    else
+        @player = Computer.new
+    end
 
-  # def get_position
-  #   puts "please enter a position in the form 'row column'"
-  #   response = gets.chomp.split(" ").map(&:to_i)
-  #   response
-  # end
+  end
 
   def play_game
     @board.populate
     
     until @board.won? || @remaining_guesses == 0
       @board.render
-      pos_1 = self.get_position
+      pos_1 = @player.get_position(@size)
       @board.reveal(pos_1)
       @board.render
-      pos_2 = self.get_position
+      pos_2 = @player.get_position(@size)
       @board.reveal(pos_2)
       @board.render
       if @board[pos_1].value != @board[pos_2].value
